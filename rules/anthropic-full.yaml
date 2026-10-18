@@ -1,0 +1,75 @@
+# Claude / Anthropic Full Rules for Clash (Mihomo)
+# =================================================
+# Core rules + third-party dependencies that Claude's web/desktop
+# client actually loads (fonts, CDN, telemetry, support widgets).
+#
+# WARNING: Some entries are SHARED services (e.g. storage.googleapis.com,
+# sentry.io, intercom.io). Routing them here will also route unrelated
+# traffic of those services through the same policy. Use the basic
+# anthropic.yaml if you only want first-party Anthropic traffic.
+#
+# Sources:
+#   - VPSDance/ai-proxy-rules (rules/clash/anthropic.yaml)
+#   - tanitany/claude-quantumultx-rules (Anthropic-Full.list)
+#   - MetaCubeX/meta-rules-dat, v2fly/domain-list-community
+#   - BGP.he.net (Anthropic, PBC)
+
+payload:
+  # ---- Core domains ----
+  - DOMAIN-SUFFIX,anthropic.com
+  - DOMAIN-SUFFIX,anthropic.com.cn
+  - DOMAIN-SUFFIX,antspace.dev
+  - DOMAIN-SUFFIX,clau.de
+  - DOMAIN-SUFFIX,claude.ai
+  - DOMAIN-SUFFIX,claude.app
+  - DOMAIN-SUFFIX,claude.com
+  - DOMAIN-SUFFIX,claude.new
+  - DOMAIN-SUFFIX,claude.site
+  - DOMAIN-SUFFIX,claudemcpclient.com
+  - DOMAIN-SUFFIX,claudemcpcontent.com
+  - DOMAIN-SUFFIX,claudepages.dev
+  - DOMAIN-SUFFIX,claudestudio.com
+  - DOMAIN-SUFFIX,claudeusercontent.com
+  - DOMAIN-SUFFIX,claude.dev
+  - DOMAIN-SUFFIX,modelcontextprotocol.com
+  - DOMAIN-SUFFIX,modelcontextprotocol.io
+  - DOMAIN-SUFFIX,modelcontextprotocol.net
+  - DOMAIN-SUFFIX,modelcontextprotocol.org
+
+  # ---- Network (Anthropic, PBC - official ASN & prefixes) ----
+  - IP-CIDR,160.79.104.0/21,no-resolve
+  - IP-CIDR6,2607:6bc0::/32,no-resolve
+  - IP-ASN,399358,no-resolve
+
+  # ---- Official third-party endpoints ----
+  - DOMAIN,anthropic-com.ghost.io
+  - DOMAIN,anthropic.auth0.com
+  - DOMAIN,anthropic.com.cdn.cloudflare.net
+  - DOMAIN,browser-intake-us5-datadoghq.com
+  - DOMAIN,cdn.growthbook.io
+  - DOMAIN,cdn.usefathom.com
+  - DOMAIN,servd-anthropic-website.b-cdn.net
+  - DOMAIN,storage.googleapis.com
+  - DOMAIN-SUFFIX,anthropic.team
+  - DOMAIN-SUFFIX,chatbotclaude.com
+  - DOMAIN-SUFFIX,intercom.io
+  - DOMAIN-SUFFIX,intercomcdn.com
+  - DOMAIN-SUFFIX,lcicat.org
+  - DOMAIN-SUFFIX,lcicollections.org
+  - DOMAIN-SUFFIX,mcpservertest.online
+  - DOMAIN-SUFFIX,muthos.com
+  - DOMAIN-SUFFIX,sentry.io
+  - DOMAIN-SUFFIX,sillylittleguy.org
+  - DOMAIN-SUFFIX,statsigapi.net
+  - DOMAIN-KEYWORD,datadog
+  - DOMAIN-KEYWORD,sentry
+  - DOMAIN-KEYWORD,sift
+
+  # ---- Shared web assets (fonts / common CDNs) ----
+  # These are used by many sites; enable only if Claude's page
+  # renders incompletely (e.g. missing fonts or icons).
+  # - DOMAIN,fonts.googleapis.com
+  # - DOMAIN,fonts.gstatic.com
+  # - DOMAIN,cdnjs.cloudflare.com
+  # - DOMAIN,cdn.jsdelivr.net
+  # - DOMAIN,unpkg.com
