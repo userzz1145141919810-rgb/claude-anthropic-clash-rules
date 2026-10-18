@@ -1,0 +1,54 @@
+# Claude / Anthropic Rules for Clash (Mihomo)
+# ============================================
+# Complete rule set for Claude / Anthropic services.
+#
+# Sources (merged & deduplicated):
+#   - MetaCubeX/meta-rules-dat (geosite/anthropic)
+#   - v2fly/domain-list-community (data/anthropic)
+#   - VPSDance/ai-proxy-rules (rules/clash/anthropic.yaml)
+#   - tanitany/claude-quantumultx-rules (Anthropic-Full.list)
+#   - BGP.he.net (ASN & prefix lookup: Anthropic, PBC)
+#
+# Format: Clash rule-provider (classical)
+# Usage:
+#   rule-providers:
+#     anthropic:
+#       type: http
+#       behavior: classical
+#       url: "https://raw.githubusercontent.com/<owner>/<repo>/main/rules/anthropic.yaml"
+#       path: ./ruleset/anthropic.yaml
+#       interval: 86400
+#
+#   rules:
+#     - RULE-SET,anthropic,<YOUR-PROXY-GROUP>
+#
+# Note: claude.ai / anthropic.com are behind Cloudflare CDN, so the
+# domain rules below are the primary coverage. The IP rules are a
+# backup for direct-IP connections.
+
+payload:
+  # ---- Core domains ----
+  - DOMAIN-SUFFIX,anthropic.com
+  - DOMAIN-SUFFIX,anthropic.com.cn
+  - DOMAIN-SUFFIX,antspace.dev
+  - DOMAIN-SUFFIX,clau.de
+  - DOMAIN-SUFFIX,claude.ai
+  - DOMAIN-SUFFIX,claude.app
+  - DOMAIN-SUFFIX,claude.com
+  - DOMAIN-SUFFIX,claude.new
+  - DOMAIN-SUFFIX,claude.site
+  - DOMAIN-SUFFIX,claudemcpclient.com
+  - DOMAIN-SUFFIX,claudemcpcontent.com
+  - DOMAIN-SUFFIX,claudepages.dev
+  - DOMAIN-SUFFIX,claudestudio.com
+  - DOMAIN-SUFFIX,claudeusercontent.com
+  - DOMAIN-SUFFIX,claude.dev
+  - DOMAIN-SUFFIX,modelcontextprotocol.com
+  - DOMAIN-SUFFIX,modelcontextprotocol.io
+  - DOMAIN-SUFFIX,modelcontextprotocol.net
+  - DOMAIN-SUFFIX,modelcontextprotocol.org
+
+  # ---- Network (Anthropic, PBC - official ASN & prefixes) ----
+  - IP-CIDR,160.79.104.0/21,no-resolve
+  - IP-CIDR6,2607:6bc0::/32,no-resolve
+  - IP-ASN,399358,no-resolve
